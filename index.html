@@ -1,46 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Morse Data Technologies - IT Solutions Provider</title>
   <meta name="description" content="South African IT solutions provider offering reliable, efficient tech support for individuals and small businesses">
   <meta name="keywords" content="IT support, Cape Town, computer repair, tech support, small business IT, workstation setup">
-
+  
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
+  <link rel="icon" href="assets/img/favicon.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-
+  
   <style>
-    /* Global Variables */
+    /* ===== GLOBAL VARIABLES ===== */
     :root {
       --background-color: #031119;
-      --default-color: rgba(255, 255, 255, 0.8);
+      --default-color: rgba(255, 255, 255, 0.85);
       --heading-color: #e0e9f2;
       --accent-color: #e3a127;
       --surface-color: #1b262c;
       --contrast-color: #ffffff;
-      --nav-color: rgba(255, 255, 255, 0.8);
+      --nav-color: rgba(255, 255, 255, 0.85);
       --nav-hover-color: #e3a127;
-      --nav-mobile-background-color: #29343a;
-      --nav-dropdown-background-color: #29343a;
-      --nav-dropdown-color: rgba(255, 255, 255, 0.8);
-      --nav-dropdown-hover-color: #e3a127;
+      --nav-mobile-background: #29343a;
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
     }
 
-    /* Base Styles */
+    /* ===== BASE STYLES ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: 'Roboto', sans-serif;
       color: var(--default-color);
@@ -52,34 +52,43 @@
     h1, h2, h3, h4, h5, h6 {
       font-family: 'Nunito Sans', sans-serif;
       color: var(--heading-color);
-      margin-bottom: 1rem;
       line-height: 1.2;
-    }
-
-    p {
-      margin-bottom: 1.5rem;
     }
 
     a {
       color: var(--accent-color);
       text-decoration: none;
-      transition: all 0.3s ease;
+      transition: var(--transition);
     }
 
     a:hover {
-      color: rgba(227, 161, 39, 0.75);
+      color: rgba(227, 161, 39, 0.85);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 0.75rem 1.75rem;
+      padding: 0.8rem 2rem;
       border-radius: 50px;
-      font-weight: 500;
-      transition: all 0.3s ease;
+      font-weight: 600;
+      transition: var(--transition);
       border: none;
       cursor: pointer;
+      font-size: 1rem;
+      gap: 0.5rem;
     }
 
     .btn-primary {
@@ -88,14 +97,14 @@
     }
 
     .btn-primary:hover {
-      background-color: rgba(227, 161, 39, 0.85);
+      background-color: rgba(227, 161, 39, 0.9);
       transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     }
 
     .btn-outline {
-      border: 1px solid var(--accent-color);
       background: transparent;
+      border: 2px solid var(--accent-color);
       color: var(--accent-color);
     }
 
@@ -105,7 +114,7 @@
     }
 
     .section {
-      padding: 5rem 0;
+      padding: 6rem 0;
       position: relative;
     }
 
@@ -139,30 +148,31 @@
       color: var(--heading-color);
     }
 
-    /* Header & Navigation */
+    /* ===== HEADER & NAVIGATION ===== */
     .header {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       z-index: 1000;
-      padding: 1rem 0;
-      transition: all 0.3s ease;
+      padding: 1.2rem 0;
+      transition: var(--transition);
       background: rgba(27, 38, 44, 0.95);
       backdrop-filter: blur(10px);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     }
 
     .header-container {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 1.5rem;
       max-width: 1200px;
       margin: 0 auto;
+      padding: 0 1.5rem;
     }
 
     .logo {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       font-weight: 700;
       color: var(--heading-color);
       z-index: 1001;
@@ -210,13 +220,13 @@
       display: none;
       background: transparent;
       border: none;
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       color: var(--nav-color);
       cursor: pointer;
       z-index: 1001;
     }
 
-    /* Hero Section */
+    /* ===== HERO SECTION ===== */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -238,12 +248,9 @@
     }
 
     .hero-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2rem;
+      gap: 3rem;
       align-items: center;
     }
 
@@ -271,6 +278,12 @@
     .hero-image {
       position: relative;
       text-align: center;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
     }
 
     .stats-card {
@@ -283,6 +296,8 @@
       text-align: center;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
       max-width: 200px;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .stats-number {
@@ -292,11 +307,8 @@
       line-height: 1;
     }
 
-    /* About Section */
+    /* ===== ABOUT SECTION ===== */
     .about-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 3rem;
@@ -321,127 +333,131 @@
       text-align: center;
     }
 
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
     .feature-item {
       background: var(--surface-color);
-      padding: 1.5rem;
+      padding: 1.8rem;
       border-radius: 10px;
-      margin-bottom: 1.5rem;
-      transition: all 0.3s ease;
+      transition: var(--transition);
     }
 
     .feature-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
     }
 
     .feature-item i {
-      font-size: 2rem;
+      font-size: 2.2rem;
       color: var(--accent-color);
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
     }
 
-    /* Services Section */
+    /* ===== SERVICES SECTION ===== */
     .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
     }
 
     .service-card {
       background: var(--surface-color);
       border-radius: 10px;
-      padding: 2rem;
+      padding: 2.5rem;
       text-align: center;
-      transition: all 0.3s ease;
+      transition: var(--transition);
       height: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .service-card:hover {
       transform: translateY(-10px);
-      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+      border-color: rgba(227, 161, 39, 0.3);
     }
 
     .service-icon {
-      font-size: 3rem;
+      font-size: 3.5rem;
       color: var(--accent-color);
       margin-bottom: 1.5rem;
     }
 
-    /* Values Section */
+    /* ===== VALUES SECTION ===== */
     .values-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
     }
 
     .value-card {
       background: var(--surface-color);
       border-radius: 10px;
-      padding: 2rem;
+      padding: 2.5rem;
       text-align: center;
-      transition: all 0.3s ease;
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .value-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
     }
 
     .value-icon {
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       color: var(--accent-color);
       margin-bottom: 1.5rem;
     }
 
-    /* Free Audit Section */
+    /* ===== FREE AUDIT SECTION ===== */
     .free-audit {
       background: linear-gradient(135deg, rgba(27, 38, 44, 0.9) 0%, rgba(3, 17, 25, 0.95) 100%);
       border-radius: 15px;
       overflow: hidden;
-      max-width: 1200px;
-      margin: 0 auto;
     }
 
     .audit-content {
-      padding: 3rem;
+      padding: 4rem;
     }
 
     .floating-badge {
       background: var(--accent-color);
       color: var(--contrast-color);
-      padding: 0.5rem 1rem;
+      padding: 0.8rem 1.5rem;
       border-radius: 30px;
       display: inline-block;
       font-weight: 600;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .benefits {
+      margin: 2rem 0;
     }
 
     .benefit-item {
       display: flex;
       align-items: flex-start;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
 
     .benefit-item i {
       color: var(--accent-color);
       margin-right: 1rem;
-      font-size: 1.5rem;
+      font-size: 1.8rem;
+      min-width: 30px;
     }
 
-    /* Call to Action */
+    /* ===== CALL TO ACTION ===== */
     .cta-section {
       background: linear-gradient(to right, rgba(3, 17, 25, 0.9), rgba(27, 38, 44, 0.9));
       border-radius: 15px;
-      padding: 3rem;
+      padding: 4rem;
       text-align: center;
-      max-width: 1200px;
-      margin: 0 auto;
     }
 
     .features {
@@ -449,65 +465,93 @@
       justify-content: center;
       flex-wrap: wrap;
       gap: 1rem;
-      margin: 2rem 0;
+      margin: 2.5rem 0;
     }
 
     .feature-item-cta {
       background: rgba(227, 161, 39, 0.1);
-      padding: 0.75rem 1.5rem;
+      padding: 0.8rem 1.8rem;
       border-radius: 30px;
       font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
-    /* Contact Section */
+    /* ===== CONTACT SECTION ===== */
     .contact-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
     }
 
     .contact-info-box {
       background: var(--surface-color);
       border-radius: 10px;
-      padding: 2rem;
+      padding: 2.5rem;
       text-align: center;
-      transition: all 0.3s ease;
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .contact-info-box:hover {
-      transform: translateY(-5px);
+      transform: translateY(-10px);
       box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
     }
 
     .contact-icon {
-      font-size: 2rem;
+      font-size: 2.5rem;
       color: var(--accent-color);
       margin-bottom: 1.5rem;
     }
 
-    /* Footer */
+    /* ===== FOOTER ===== */
     .footer {
       background: var(--surface-color);
-      padding: 4rem 0 2rem;
+      padding: 5rem 0 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 3rem;
     }
 
-    .footer-links h4 {
-      font-size: 1.25rem;
+    .footer-about .logo {
+      font-size: 1.8rem;
       margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      background: var(--accent-color);
+      color: var(--contrast-color);
+      transform: translateY(-5px);
+    }
+
+    .footer-links h4 {
+      font-size: 1.3rem;
+      margin-bottom: 1.8rem;
       position: relative;
-      padding-bottom: 0.75rem;
+      padding-bottom: 0.8rem;
     }
 
     .footer-links h4::after {
@@ -522,16 +566,15 @@
 
     .footer-links ul {
       list-style: none;
-      padding: 0;
     }
 
     .footer-links ul li {
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.8rem;
     }
 
     .footer-links ul li a {
       color: rgba(255, 255, 255, 0.7);
-      transition: all 0.3s ease;
+      transition: var(--transition);
     }
 
     .footer-links ul li a:hover {
@@ -542,11 +585,11 @@
     .copyright {
       text-align: center;
       padding-top: 3rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
       margin-top: 3rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    /* Responsive Adjustments */
+    /* ===== RESPONSIVE ADJUSTMENTS ===== */
     @media (max-width: 992px) {
       .hero-content,
       .about-content {
@@ -561,6 +604,10 @@
       .main-heading h1 {
         font-size: 2.8rem;
       }
+      
+      .section {
+        padding: 5rem 0;
+      }
     }
 
     @media (max-width: 768px) {
@@ -574,11 +621,12 @@
         right: -100%;
         width: 70%;
         height: 100vh;
-        background: var(--nav-mobile-background-color);
+        background: var(--nav-mobile-background);
         flex-direction: column;
         justify-content: center;
-        transition: all 0.4s ease;
+        transition: var(--transition);
         z-index: 1000;
+        padding: 2rem;
       }
       
       .navmenu.active {
@@ -587,11 +635,7 @@
       
       .navmenu ul {
         flex-direction: column;
-        padding: 2rem;
-      }
-      
-      .navmenu ul li {
-        margin: 1rem 0;
+        gap: 1.5rem;
       }
       
       .section-title div {
@@ -602,12 +646,13 @@
         font-size: 2.2rem;
       }
       
-      .stats-card {
-        position: relative;
-        max-width: 100%;
-        margin-top: 2rem;
-        right: auto;
-        bottom: auto;
+      .audit-content,
+      .cta-section {
+        padding: 2.5rem;
+      }
+      
+      .features-grid {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -617,7 +662,19 @@
       }
       
       .section {
-        padding: 3rem 0;
+        padding: 4rem 0;
+      }
+      
+      .section-title div {
+        font-size: 1.8rem;
+      }
+      
+      .stats-card {
+        position: relative;
+        max-width: 100%;
+        margin-top: 2rem;
+        right: auto;
+        bottom: auto;
       }
     }
   </style>
@@ -626,7 +683,7 @@
 <body class="index-page">
   <!-- Header -->
   <header id="header" class="header">
-    <div class="header-container">
+    <div class="container header-container">
       <a href="index.html" class="logo">Morse Data</a>
       
       <nav id="navmenu" class="navmenu">
@@ -649,37 +706,40 @@
 
   <!-- Hero Section -->
   <section id="hero" class="hero section">
-    <div class="hero-content">
-      <div class="hero-text">
-        <div class="agency-name">
-          <h5>MORSE DATA TECHNOLOGIES</h5>
-        </div>
-
-        <div class="main-heading">
-          <h1>EMPOWERING PEOPLE.<br>POWERING POSSIBILITIES.</h1>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="description">
-          <p>Reliable IT solutions for individuals and small businesses. We bridge the gap between people and technology with care, precision, and a genuine desire to see your business thrive wherever you are.</p>
-        </div>
-
-        <div class="cta-button">
-          <a href="#contact" class="btn btn-primary">
-            <span>GET SUPPORT</span>
-            <i class="bi bi-arrow-right"></i>
-          </a>
-        </div>
-      </div>
-      
-      <div class="hero-image">
-        <div class="stats-card">
-          <div class="stats-number">
-            <h2>13+</h2>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <div class="agency-name">
+            <h5>MORSE DATA TECHNOLOGIES</h5>
           </div>
-          <div class="stats-label">
-            <p>Years of Experience</p>
+
+          <div class="main-heading">
+            <h1>EMPOWERING PEOPLE.<br>POWERING POSSIBILITIES.</h1>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="description">
+            <p>Reliable IT solutions for individuals and small businesses. We bridge the gap between people and technology with care, precision, and a genuine desire to see your business thrive wherever you are.</p>
+          </div>
+
+          <div class="cta-button">
+            <a href="#contact" class="btn btn-primary">
+              <span>GET SUPPORT</span>
+              <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="hero-image">
+          <img src="assets/img/tech-support.png" alt="IT Support Professional">
+          <div class="stats-card">
+            <div class="stats-number">
+              <h2>13+</h2>
+            </div>
+            <div class="stats-label">
+              <p>Years of Experience</p>
+            </div>
           </div>
         </div>
       </div>
@@ -688,317 +748,320 @@
 
   <!-- About Section -->
   <section id="about" class="about section">
-    <div class="section-title" data-aos="fade-up">
-      <h2>About</h2>
-      <div><span>Learn More</span> <span class="description-title">About Us</span></div>
-    </div>
-
-    <div class="about-content">
-      <div class="about-image" data-aos="fade-right" data-aos-delay="200">
-        <div class="experience-badge">
-          <span class="years">13+ <br /></span>
-          <span class="text">Years in IT </span>
-        </div>
+    <div class="container">
+      <div class="section-title">
+        <h2>About</h2>
+        <div><span>Learn More</span> <span class="description-title">About Us</span></div>
       </div>
 
-      <div class="about-text" data-aos="fade-left" data-aos-delay="300">
-        <h2>Your Trusted Tech Partner Based in Cape Town, Serving Everywhere</h2>
-        <p class="lead">Founded by Sabelo Mtshali, Morse Data Technologies is committed to delivering reliable, efficient, and people-focused tech support.</p>
-        <p>We specialise in making technology work for individuals, small businesses, and professional service firms. From setting up new workstations to recovering from crashes or configuring digital tools; we handle it all with care, clarity, and precision.</p>
-
-        <div class="features-grid">
-          <div class="feature-item">
-            <i class="bi bi-check-circle-fill"></i>
-            <h5>Personalized Service</h5>
-            <p>We treat every job like it matters, because to you, it does. Your trust is our greatest asset.</p>
-          </div>
-          <div class="feature-item">
-            <i class="bi bi-lightbulb-fill"></i>
-            <h5>Proactive Solutions</h5>
-            <p>We don't just fix problems, we help prevent them and teach you how to use technology effectively.</p>
+      <div class="about-content">
+        <div class="about-image">
+          <img src="assets/img/sabelo-mtshali.jpg" alt="Sabelo Mtshali">
+          <div class="experience-badge">
+            <span class="years">13+ <br /></span>
+            <span class="text">Years in IT </span>
           </div>
         </div>
 
-        <a href="#contact" class="btn btn-primary mt-4">Contact Us</a>
+        <div class="about-text">
+          <h2>Your Trusted Tech Partner Based in Cape Town, Serving Everywhere</h2>
+          <p class="lead">Founded by Sabelo Mtshali, Morse Data Technologies is committed to delivering reliable, efficient, and people-focused tech support.</p>
+          <p>We specialise in making technology work for individuals, small businesses, and professional service firms. From setting up new workstations to recovering from crashes or configuring digital tools; we handle it all with care, clarity, and precision.</p>
+
+          <div class="features-grid">
+            <div class="feature-item">
+              <i class="bi bi-check-circle-fill"></i>
+              <h5>Personalized Service</h5>
+              <p>We treat every job like it matters, because to you, it does. Your trust is our greatest asset.</p>
+            </div>
+            <div class="feature-item">
+              <i class="bi bi-lightbulb-fill"></i>
+              <h5>Proactive Solutions</h5>
+              <p>We don't just fix problems, we help prevent them and teach you how to use technology effectively.</p>
+            </div>
+          </div>
+
+          <a href="#contact" class="btn btn-primary mt-4">Contact Us</a>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Services Section -->
   <section id="services" class="services section">
-    <div class="section-title" data-aos="fade-up">
-      <h2>Services</h2>
-      <div><span>Our</span> <span class="description-title">IT Solutions</span></div>
-    </div>
+    <div class="container">
+      <div class="section-title">
+        <h2>Services</h2>
+        <div><span>Our</span> <span class="description-title">IT Solutions</span></div>
+      </div>
 
-    <div class="services-grid">
-      <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-        <div class="service-icon">
-          <i class="bi bi-laptop"></i>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="bi bi-laptop"></i>
+          </div>
+          <h3>On-Site Technical Support</h3>
+          <p>Call-outs within local radius for hands-on troubleshooting, hardware repairs, and system diagnostics.</p>
         </div>
-        <h3>On-Site Technical Support</h3>
-        <p>Call-outs within local radius for hands-on troubleshooting, hardware repairs, and system diagnostics.</p>
-      </div>
-      
-      <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-        <div class="service-icon">
-          <i class="bi bi-pc-display"></i>
+        
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="bi bi-pc-display"></i>
+          </div>
+          <h3>Workstation Setup</h3>
+          <p>Complete configuration of new computers, including software installation and peripheral setup.</p>
         </div>
-        <h3>Workstation Setup</h3>
-        <p>Complete configuration of new computers, including software installation and peripheral setup.</p>
-      </div>
-      
-      <div class="service-card" data-aos="fade-up" data-aos-delay="300">
-        <div class="service-icon">
-          <i class="bi bi-tools"></i>
+        
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="bi bi-tools"></i>
+          </div>
+          <h3>Crash Recovery</h3>
+          <p>Data recovery and system restoration services to get you back up and running after hardware or software failures.</p>
         </div>
-        <h3>Crash Recovery</h3>
-        <p>Data recovery and system restoration services to get you back up and running after hardware or software failures.</p>
-      </div>
-      
-      <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-        <div class="service-icon">
-          <i class="bi bi-cloud-arrow-up"></i>
+        
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="bi bi-cloud-arrow-up"></i>
+          </div>
+          <h3>Email, Cloud Setup & Web Design</h3>
+          <p>Configuration of email clients, cloud services like Google Workspace, and design of clean, mobile-friendly websites.</p>
         </div>
-        <h3>Email, Cloud Setup & Web Design</h3>
-        <p>Configuration of email clients, cloud services like Google Workspace, and design of clean, mobile-friendly websites.</p>
-      </div>
-      
-      <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-        <div class="service-icon">
-          <i class="bi bi-headset"></i>
+        
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="bi bi-headset"></i>
+          </div>
+          <h3>Remote Support</h3>
+          <p>Quick assistance for software issues, configuration problems, and troubleshooting via remote connection.</p>
         </div>
-        <h3>Remote Support</h3>
-        <p>Quick assistance for software issues, configuration problems, and troubleshooting via remote connection.</p>
-      </div>
-      
-      <div class="service-card" data-aos="fade-up" data-aos-delay="300">
-        <div class="service-icon">
-          <i class="bi bi-lightbulb"></i>
+        
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="bi bi-lightbulb"></i>
+          </div>
+          <h3>IT Advisory</h3>
+          <p>Guidance on technology choices, system upgrades, and digital tools tailored for small businesses.</p>
         </div>
-        <h3>IT Advisory</h3>
-        <p>Guidance on technology choices, system upgrades, and digital tools tailored for small businesses.</p>
       </div>
     </div>
   </section>
                     
   <!-- Values Section -->
   <section id="values" class="values section">
-    <div class="section-title" data-aos="fade-up">
-      <h2>Values</h2>
-      <div><span>Our Core</span> <span class="description-title">Principles</span></div>
-    </div>
-
-    <div class="values-grid">
-      <div class="value-card" data-aos="fade-up" data-aos-delay="100">
-        <div class="value-icon">
-          <i class="bi bi-shield-check"></i>
-        </div>
-        <h3>Reliability</h3>
-        <p>We do what we say, when we say it. Your trust is our greatest asset.</p>
+    <div class="container">
+      <div class="section-title">
+        <h2>Values</h2>
+        <div><span>Our Core</span> <span class="description-title">Principles</span></div>
       </div>
 
-      <div class="value-card" data-aos="fade-up" data-aos-delay="200">
-        <div class="value-icon">
-          <i class="bi bi-people"></i>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="bi bi-shield-check"></i>
+          </div>
+          <h3>Reliability</h3>
+          <p>We do what we say, when we say it. Your trust is our greatest asset.</p>
         </div>
-        <h3>Empowerment</h3>
-        <p>We don't just fix; we teach, guide, and help you grow confidently with tech.</p>
-      </div>
 
-      <div class="value-card" data-aos="fade-up" data-aos-delay="300">
-        <div class="value-icon">
-          <i class="bi bi-gem"></i>
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="bi bi-people"></i>
+          </div>
+          <h3>Empowerment</h3>
+          <p>We don't just fix; we teach, guide, and help you grow confidently with tech.</p>
         </div>
-        <h3>Integrity</h3>
-        <p>Transparent pricing and services that make sense for your needs, not just our pockets.</p>
-      </div>
 
-      <div class="value-card" data-aos="fade-up" data-aos-delay="400">
-        <div class="value-icon">
-          <i class="bi bi-heart"></i>
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="bi bi-gem"></i>
+          </div>
+          <h3>Integrity</h3>
+          <p>Transparent pricing and services that make sense for your needs, not just our pockets.</p>
         </div>
-        <h3>Care</h3>
-        <p>We treat every job, big or small, like it matters, because to you, it does.</p>
+
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="bi bi-heart"></i>
+          </div>
+          <h3>Care</h3>
+          <p>We treat every job, big or small, like it matters, because to you, it does.</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Free Audit Section -->
   <section id="free-audit" class="free-audit section">
-    <div class="section-title" data-aos="fade-up">
-      <h2>Free Audit</h2>
-      <div><span>Get Your</span> <span class="description-title">Free IT Assessment</span></div>
-    </div>
-
-    <div class="audit-content">
-      <div class="floating-badge">FREE 30-Minute Assessment</div>
-      <h2>Free 30-Minute IT Audit for Your Business</h2>
-      <p class="lead">Let us help identify potential risks, inefficiencies, and opportunities in your current IT setup - at no cost to you.</p>
-      
-      <div class="benefits">
-        <div class="benefit-item">
-          <i class="bi bi-check-circle-fill"></i>
-          <div>
-            <h5>Security Check</h5>
-            <p>Identify vulnerabilities in your systems and data protection</p>
+    <div class="container">
+      <div class="audit-content">
+        <div class="floating-badge">FREE 30-Minute Assessment</div>
+        <h2>Free 30-Minute IT Audit for Your Business</h2>
+        <p class="lead">Let us help identify potential risks, inefficiencies, and opportunities in your current IT setup - at no cost to you.</p>
+        
+        <div class="benefits">
+          <div class="benefit-item">
+            <i class="bi bi-check-circle-fill"></i>
+            <div>
+              <h5>Security Check</h5>
+              <p>Identify vulnerabilities in your systems and data protection</p>
+            </div>
+          </div>
+          
+          <div class="benefit-item">
+            <i class="bi bi-check-circle-fill"></i>
+            <div>
+              <h5>Efficiency Review</h5>
+              <p>Spot outdated processes slowing you down</p>
+            </div>
+          </div>
+          
+          <div class="benefit-item">
+            <i class="bi bi-check-circle-fill"></i>
+            <div>
+              <h5>Growth Opportunities</h5>
+              <p>Discover tools that could help scale your business</p>
+            </div>
           </div>
         </div>
         
-        <div class="benefit-item">
-          <i class="bi bi-check-circle-fill"></i>
-          <div>
-            <h5>Efficiency Review</h5>
-            <p>Spot outdated processes slowing you down</p>
-          </div>
+        <div class="cta-buttons">
+          <a href="https://wa.link/9q3rbz" class="btn btn-primary">
+            <i class="bi bi-calendar-check"></i> Book Your Free Audit
+          </a>
+          <a href="tel:+27615077541" class="btn btn-outline mt-3">
+            <i class="bi bi-telephone"></i> Call to Inquire
+          </a>
         </div>
         
-        <div class="benefit-item">
-          <i class="bi bi-check-circle-fill"></i>
-          <div>
-            <h5>Growth Opportunities</h5>
-            <p>Discover tools that could help scale your business</p>
-          </div>
+        <div class="audit-note mt-4">
+          <p><small>* Limited availability. No obligation. Valid for small businesses and individuals.</small></p>
         </div>
-      </div>
-      
-      <div class="cta-buttons mt-4">
-        <a href="https://wa.link/9q3rbz" class="btn btn-primary me-3">
-          <i class="bi bi-calendar-check"></i> Book Your Free Audit
-        </a>
-        <a href="tel:+27615077541" class="btn btn-outline">
-          <i class="bi bi-telephone"></i> Call to Inquire
-        </a>
-      </div>
-      
-      <div class="audit-note mt-3">
-        <p><small>* Limited availability. No obligation. Valid for small businesses and individuals.</small></p>
       </div>
     </div>
   </section>
 
   <!-- Call To Action Section -->
   <section id="call-to-action" class="cta-section section">
-    <h2>Ready to Simplify Your Technology?</h2>
-    <p>Contact Morse Data Technologies today for reliable IT support that puts people first. We're here to make technology work for you, not against you.</p>
+    <div class="container">
+      <h2>Ready to Simplify Your Technology?</h2>
+      <p>Contact Morse Data Technologies today for reliable IT support that puts people first. We're here to make technology work for you, not against you.</p>
 
-    <div class="features">
-      <div class="feature-item-cta">
-        <i class="bi bi-check-circle-fill"></i>
-        <span>Quick Response</span>
+      <div class="features">
+        <div class="feature-item-cta">
+          <i class="bi bi-check-circle-fill"></i>
+          <span>Quick Response</span>
+        </div>
+        <div class="feature-item-cta">
+          <i class="bi bi-check-circle-fill"></i>
+          <span>Transparent Pricing</span>
+        </div>
+        <div class="feature-item-cta">
+          <i class="bi bi-check-circle-fill"></i>
+          <span>Local Support</span>
+        </div>
       </div>
-      <div class="feature-item-cta">
-        <i class="bi bi-check-circle-fill"></i>
-        <span>Transparent Pricing</span>
-      </div>
-      <div class="feature-item-cta">
-        <i class="bi bi-check-circle-fill"></i>
-        <span>Local Support</span>
-      </div>
-    </div>
 
-    <div class="cta-buttons">
-      <a href="tel:+27615077541" class="btn btn-primary me-2">
-        <i class="bi bi-telephone"></i> Call Now
-      </a>
-      <a href="https://wa.me/27615077541" class="btn btn-outline">
-        <i class="bi bi-whatsapp"></i> WhatsApp
-      </a>
+      <div class="cta-buttons">
+        <a href="tel:+27615077541" class="btn btn-primary">
+          <i class="bi bi-telephone"></i> Call Now
+        </a>
+        <a href="https://wa.me/27615077541" class="btn btn-outline mt-3">
+          <i class="bi bi-whatsapp"></i> WhatsApp
+        </a>
+      </div>
     </div>
   </section>
 
   <!-- Contact Section -->
   <section id="contact" class="contact section">
-    <div class="section-title" data-aos="fade-up">
-      <h2>Contact</h2>
-      <div><span>Get In</span> <span class="description-title">Touch</span></div>
-    </div>
-
-    <div class="contact-grid">
-      <div class="contact-info-box" data-aos="fade-up" data-aos-delay="100">
-        <div class="contact-icon">
-          <i class="bi bi-geo-alt"></i>
-        </div>
-        <h4>Our Location</h4>
-        <p>Cape Town, South Africa</p>
+    <div class="container">
+      <div class="section-title">
+        <h2>Contact</h2>
+        <div><span>Get In</span> <span class="description-title">Touch</span></div>
       </div>
 
-      <div class="contact-info-box" data-aos="fade-up" data-aos-delay="200">
-        <div class="contact-icon">
-          <i class="bi bi-envelope"></i>
+      <div class="contact-grid">
+        <div class="contact-info-box">
+          <div class="contact-icon">
+            <i class="bi bi-geo-alt"></i>
+          </div>
+          <h4>Our Location</h4>
+          <p>Cape Town, South Africa</p>
         </div>
-        <h4>Email Us</h4>
-        <p>support@morsedata.co.za</p>
-      </div>
 
-      <div class="contact-info-box" data-aos="fade-up" data-aos-delay="300">
-        <div class="contact-icon">
-          <i class="bi bi-headset"></i>
+        <div class="contact-info-box">
+          <div class="contact-icon">
+            <i class="bi bi-envelope"></i>
+          </div>
+          <h4>Email Us</h4>
+          <p>support@morsedata.co.za</p>
         </div>
-        <h4>Call Us</h4>
-        <p>+27 61 507 7541</p>
+
+        <div class="contact-info-box">
+          <div class="contact-icon">
+            <i class="bi bi-headset"></i>
+          </div>
+          <h4>Call Us</h4>
+          <p>+27 61 507 7541</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
   <footer id="footer" class="footer">
-    <div class="footer-container">
-      <div class="footer-about">
-        <a href="index.html" class="logo">Morse Data</a>
-        <p>Empowering people through reliable IT solutions in Cape Town. We bridge the gap between people and technology with care and precision.</p>
-        <div class="social-links">
-          <a href="#"><i class="bi bi-facebook"></i></a>
-          <a href="#"><i class="bi bi-linkedin"></i></a>
-          <a href="https://wa.me/27615077541"><i class="bi bi-whatsapp"></i></a>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-about">
+          <a href="index.html" class="logo">Morse Data</a>
+          <p>Empowering people through reliable IT solutions in Cape Town. We bridge the gap between people and technology with care and precision.</p>
+          <div class="social-links">
+            <a href="#"><i class="bi bi-facebook"></i></a>
+            <a href="#"><i class="bi bi-linkedin"></i></a>
+            <a href="https://wa.me/27615077541"><i class="bi bi-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#values">Our Values</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="#services">On-Site Support</a></li>
+            <li><a href="#services">Workstation Setup</a></li>
+            <li><a href="#services">Crash Recovery</a></li>
+            <li><a href="#services">Cloud Setup</a></li>
+            <li><a href="#services">IT Advisory</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-contact">
+          <h4>Contact Info</h4>
+          <p>Cape Town, South Africa</p>
+          <p><strong>Phone:</strong> +27 61 507 7541</p>
+          <p><strong>Email:</strong> info@morsedata.co.za</p>
+          <p><strong>Website:</strong> www.morsedata.co.za</p>
         </div>
       </div>
 
-      <div class="footer-links">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="#hero">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#values">Our Values</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
+      <div class="copyright">
+        <p>© <span id="currentYear"></span> Copyright <strong>Morse Data Technologies</strong> All Rights Reserved</p>
       </div>
-
-      <div class="footer-links">
-        <h4>Our Services</h4>
-        <ul>
-          <li><a href="#services">On-Site Support</a></li>
-          <li><a href="#services">Workstation Setup</a></li>
-          <li><a href="#services">Crash Recovery</a></li>
-          <li><a href="#services">Cloud Setup</a></li>
-          <li><a href="#services">IT Advisory</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-contact">
-        <h4>Contact Info</h4>
-        <p>Cape Town, South Africa</p>
-        <p><strong>Phone:</strong> +27 61 507 7541</p>
-        <p><strong>Email:</strong> info@morsedata.co.za</p>
-        <p><strong>Website:</strong> www.morsedata.co.za</p>
-      </div>
-    </div>
-
-    <div class="copyright">
-      <p>© <span id="currentYear"></span> Copyright <strong>Morse Data Technologies</strong> All Rights Reserved</p>
     </div>
   </footer>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-
   <script>
-    // Initialize components when DOM is loaded
+    // Initialize when DOM is loaded
     document.addEventListener('DOMContentLoaded', function() {
       // Set current year in footer
       document.getElementById('currentYear').textContent = new Date().getFullYear();
@@ -1019,20 +1082,12 @@
       document.querySelectorAll('.navmenu a').forEach(link => {
         link.addEventListener('click', () => {
           navMenu.classList.remove('active');
-          mobileNavToggle.querySelector('i').classList.add('bi-list');
-          mobileNavToggle.querySelector('i').classList.remove('bi-x');
+          if (mobileNavToggle) {
+            mobileNavToggle.querySelector('i').classList.add('bi-list');
+            mobileNavToggle.querySelector('i').classList.remove('bi-x');
+          }
         });
       });
-      
-      // Initialize AOS (Animate on Scroll)
-      if (typeof AOS !== 'undefined') {
-        AOS.init({
-          duration: 800,
-          easing: 'ease-in-out',
-          once: true,
-          mirror: false
-        });
-      }
       
       // Smooth scrolling for anchor links
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1041,13 +1096,56 @@
           
           const target = document.querySelector(this.getAttribute('href'));
           if (target) {
+            const headerHeight = document.querySelector('.header').offsetHeight;
+            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+            
             window.scrollTo({
-              top: target.offsetTop - 80,
+              top: targetPosition,
               behavior: 'smooth'
             });
           }
         });
       });
+      
+      // Header scroll effect
+      window.addEventListener('scroll', function() {
+        const header = document.querySelector('.header');
+        if (window.scrollY > 50) {
+          header.style.padding = '0.8rem 0';
+          header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.2)';
+        } else {
+          header.style.padding = '1.2rem 0';
+          header.style.boxShadow = 'none';
+        }
+      });
+      
+      // Animation on scroll for elements
+      function animateOnScroll() {
+        const elements = document.querySelectorAll('.service-card, .value-card, .feature-item');
+        
+        elements.forEach(element => {
+          const elementPosition = element.getBoundingClientRect().top;
+          const screenPosition = window.innerHeight / 1.3;
+          
+          if (elementPosition < screenPosition) {
+            element.style.opacity = '1';
+            element.style.transform = 'translateY(0)';
+          }
+        });
+      }
+      
+      // Initialize animations
+      document.querySelectorAll('.service-card, .value-card, .feature-item').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      });
+      
+      // Initial check
+      animateOnScroll();
+      
+      // Listen for scroll events
+      window.addEventListener('scroll', animateOnScroll);
     });
   </script>
 </body>
