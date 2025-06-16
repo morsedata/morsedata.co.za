@@ -3759,6 +3759,61 @@ section,
   }
 }
 
+/* Free Audit Section */
+.free-audit {
+  background-color: #f8f9fa;
+  padding: 100px 0;
+}
+
+.audit-visual {
+  position: relative;
+}
+
+.floating-badge {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  background: var(--primary);
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.floating-badge span:first-child {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.audit-benefits {
+  margin: 30px 0;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.benefit-item i {
+  color: var(--primary);
+  font-size: 1.5rem;
+  margin-right: 15px;
+  margin-top: 3px;
+}
+
+.benefit-item h5 {
+  margin-bottom: 5px;
+  color: var(--heading);
+}
+
+.audit-note {
+  color: #6c757d;
+}
 /*--------------------------------------------------------------
 # Starter Section Section
 --------------------------------------------------------------*/
