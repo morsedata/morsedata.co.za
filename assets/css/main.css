@@ -1780,6 +1780,34 @@ section,
   }
 }
 
+/* Add this to your main.css file */
+.call-to-action {
+  position: relative;
+  overflow: visible; /* Changed from hidden if it was set */
+  min-height: 400px; /* Ensures section always has space */
+}
+
+.call-to-action .advertise-1 {
+  position: relative;
+  z-index: 2; /* Ensures content stays above any decorative elements */
+}
+
+.call-to-action .content-right {
+  z-index: 1; /* Proper layering */
+}
+
+/* Ensure AOS animations don't make content disappear */
+[data-aos] {
+  pointer-events: auto !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* When animations are initialized */
+html:not(.no-js) [data-aos^=fade][data-aos^=fade] {
+  opacity: 1;
+}
+
 @keyframes float {
 
   0%,
