@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Notice - Morse Data Technologies</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --background-color: #031119;
+            --default-color: rgba(255, 255, 255, 0.85);
+            --heading-color: #e0e9f2;
+            --accent-color: #e3a127;
+            --surface-color: #1b262c;
+            --contrast-color: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--default-color);
+            line-height: 1.6;
+        }
+        
+        .privacy-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .privacy-header {
+            text-align: center;
+            padding: 4rem 0 2rem;
+            background: linear-gradient(135deg, rgba(27, 38, 44, 0.8) 0%, rgba(3, 17, 25, 0.9) 100%);
+            border-bottom: 2px solid var(--accent-color);
+        }
+        
+        .privacy-header h1 {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 2.8rem;
+            color: var(--heading-color);
+            margin-bottom: 1rem;
+        }
+        
+        .last-updated {
+            background-color: var(--accent-color);
+            color: var(--contrast-color);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            display: inline-block;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        .owner {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .section {
+            background-color: var(--surface-color);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .section h2 {
+            font-family: 'Nunito Sans', sans-serif;
+            color: var(--accent-color);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+        
+        .section ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section li {
+            margin-bottom: 0.8rem;
+            position: relative;
+        }
+        
+        .section li::before {
+            content: "•";
+            color: var(--accent-color);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        
+        .highlight-box {
+            background: rgba(227, 161, 39, 0.1);
+            border-left: 4px solid var(--accent-color);
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .contact-section {
+            text-align: center;
+            padding: 3rem;
+            background: linear-gradient(135deg, rgba(27, 38, 44, 0.9) 0%, rgba(3, 17, 25, 0.95) 100%);
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+        
+        .contact-section h2 {
+            font-family: 'Nunito Sans', sans-serif;
+            color: var(--heading-color);
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .contact-methods {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.8rem;
+            background-color: var(--surface-color);
+            border-radius: 50px;
+            text-decoration: none;
+            color: var(--default-color);
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+        
+        .contact-method:hover {
+            background-color: var(--accent-color);
+            color: var(--contrast-color);
+            transform: translateY(-3px);
+        }
+        
+        .contact-icon {
+            font-size: 1.4rem;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .back-to-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.8rem;
+            background-color: var(--accent-color);
+            color: var(--contrast-color);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .back-to-home:hover {
+            background-color: rgba(227, 161, 39, 0.9);
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .privacy-container {
+                padding: 1rem;
+            }
+            
+            .privacy-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            .contact-methods {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="privacy-container">
+        <header class="privacy-header">
+            <h1>Privacy Notice</h1>
+            <div class="last-updated">Last updated: June 2025</div>
+            <p class="owner">Owner: Morse Data Technologies</p>
+        </header>
+        
+        <main class="privacy-content">
+            <div class="section">
+                <h2>1. Who We Are</h2>
+                <p>Morse Data Technologies is an IT services company based in South Africa. We help individuals and small businesses with tech support, website design, cloud setups, and more. We are committed to protecting your privacy and handling your data respectfully.</p>
+            </div>
+            
+            <div class="section">
+                <h2>2. What Personal Data We Collect</h2>
+                <p>We only collect the personal data you choose to share with us. This may include:</p>
+                <ul>
+                    <li>Your name and contact details (when you complete a form or send us an email)</li>
+                    <li>Basic website usage data (via privacy-friendly analytics tools)</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2>3. How We Use Your Information</h2>
+                <p>We use your information to:</p>
+                <ul>
+                    <li>Respond to your messages or service requests</li>
+                    <li>Improve our website and service offerings</li>
+                    <li>Understand how people use our website (in an anonymous way)</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2>4. Analytics & Cookies</h2>
+                <div class="highlight-box">
+                    <p>We use a privacy-first analytics tool that:</p>
+                    <ul>
+                        <li>Does NOT use cookies</li>
+                        <li>Does NOT collect personal identifiers</li>
+                        <li>DOES help us see general usage patterns (like page views and device types)</li>
+                    </ul>
+                    <p><strong>No invasive tracking. No selling of your data.</strong></p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>5. Sharing of Your Data</h2>
+                <p>We do not sell, rent, or trade your information. We may share it only if:</p>
+                <ul>
+                    <li>Required by law</li>
+                    <li>You ask us to</li>
+                    <li>We're working with a trusted partner to deliver a service you requested (like hosting)</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2>6. Your Rights</h2>
+                <p>Under South Africa's POPIA law, you have the right to:</p>
+                <ul>
+                    <li>Ask what data we have about you</li>
+                    <li>Request corrections</li>
+                    <li>Ask for deletion (where applicable)</li>
+                </ul>
+                <p>You can contact us any time at <a href="mailto:info@morsedata.co.za" class="contact-link">info@morsedata.co.za</a>.</p>
+            </div>
+            
+            <div class="section">
+                <h2>7. Third-Party Links</h2>
+                <p>Our site may link to other websites (like partners or tools). We are not responsible for the privacy practices or content of those sites.</p>
+            </div>
+            
+            <div class="section">
+                <h2>8. Changes to This Notice</h2>
+                <p>This privacy notice may be updated occasionally. We'll update the "Last updated" date whenever we make changes.</p>
+            </div>
+            
+            <div class="contact-section">
+                <h2>Contact Us</h2>
+                <p>If you have any questions or concerns about our privacy practices, please reach out to us:</p>
+                
+                <div class="contact-methods">
+                    <a href="mailto:info@morsedata.co.za" class="contact-method">
+                        <i class="fas fa-envelope contact-icon"></i>
+                        <span>info@morsedata.co.za</span>
+                    </a>
+                    
+                    <a href="https://www.morsedata.co.za" class="contact-method">
+                        <i class="fas fa-globe contact-icon"></i>
+                        <span>www.morsedata.co.za</span>
+                    </a>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p>&copy; 2025 Morse Data Technologies. All rights reserved.</p>
+            <a href="index.html" class="back-to-home">
+                <i class="fas fa-arrow-left"></i>
+                Back to Homepage
+            </a>
+        </footer>
+    </div>
+
+    <script>
+        // Add current year to footer
+        document.addEventListener('DOMContentLoaded', function() {
+            const yearSpan = document.createElement('span');
+            yearSpan.textContent = new Date().getFullYear();
+            document.querySelector('footer p').innerHTML = `&copy; ${yearSpan.textContent} Morse Data Technologies. All rights reserved.`;
+            
+            // Add smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
