@@ -269,10 +269,11 @@
     }
     
     .hero-image img {
-      width: 65%;
+      width: 70%;
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       animation: float 6s ease-in-out infinite;
+      animation: rotation 120s infinite;
     }
     
     .stats-card {
@@ -808,6 +809,10 @@
         transform: translateY(0px);
       }
     }
+  
+    @keyframes rotation {
+    	  100% {transform: rotate(-360deg);}
+    	}
     
     @keyframes pulse {
       0% {
