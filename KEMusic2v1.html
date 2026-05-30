@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KE Music Limited - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans p-6">
+
+    <div class="max-w-7xl mx-auto space-y-6">
+        
+        <div class="bg-white p-6 rounded-xl shadow-sm flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900">🎵 KE Music Limited Analytics</h1>
+                <p class="text-sm text-gray-500 mt-1" id="rate-display">Fetching live exchange rate...</p>
+            </div>
+            <div class="w-full md:w-auto">
+                <label class="block mb-2 text-sm font-medium text-gray-900">Upload Excel File (.xlsx)</label>
+                <input type="file" id="file-upload" accept=".xlsx, .xls, .csv" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer">
+            </div>
+        </div>
+
+        <div id="dashboard" class="hidden space-y-6">
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-green-500">
+                    <h3 class="text-gray-500 text-sm font-semibold uppercase">Total Earnings (USD)</h3>
+                    <p class="text-3xl font-bold text-gray-900 mt-2" id="metric-usd">$0.00</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-yellow-500">
+                    <h3 class="text-gray-500 text-sm font-semibold uppercase">Total Earnings (ZAR)</h3>
+                    <p class="text-3xl font-bold text-gray-900 mt-2" id="metric-zar">R0.00</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-blue-500">
+                    <h3 class="text-gray-500 text-sm font-semibold uppercase">Total Streams</h3>
+                    <p class="text-3xl font-bold text-gray-900 mt-2" id="metric-streams">0</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <h3 class="font-bold text-lg mb-4">Earnings by Artist (USD)</h3>
+                    <canvas id="artistChart" height="250"></canvas>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <h3 class="font-bold text-lg mb-4">Top Stores by Streams</h3>
+                    <canvas id="storeChart" height="250"></canvas>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <h3 class="font-bold text-lg mb-4">Top 10 Performing Songs (USD)</h3>
+                    <canvas id="songChart" height="250"></canvas>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <h3 class="font-bold text-lg mb-4">Top 10 Performing Countries (USD)</h3>
+                    <canvas id="countryChart" height="250"></canvas>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm flex flex-col h-full lg:col-span-1">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">💸 Withdrawal Fee Calculator</h3>
+                    <p class="text-sm text-gray-500 mb-6">Calculated against your total current earnings to find the best method for the team.</p>
+                    
+                    <div class="bg-green-50 p-4 rounded-xl border border-green-200 mb-4">
+                        <h4 class="text-green-800 font-bold mb-1">🏆 Recommended (Non-U.S.)</h4>
+                        <p class="text-xl font-black text-green-900" id="rec-method">-</p>
+                        <p class="text-sm text-green-700 mt-1"><strong>Fee:</strong> $<span id="rec-fee">0.00</span> | <strong>Net:</strong> $<span id="rec-net">0.00</span> <span class="italic" id="rec-zar">(≈ R0.00)</span></p>
+                    </div>
+                    
+                    <div class="overflow-x-auto flex-grow">
+                        <table class="w-full text-sm text-left text-gray-500">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                                <tr>
+                                    <th class="px-4 py-2">Payout Method</th>
+                                    <th class="px-4 py-2">Fee</th>
+                                    <th class="px-4 py-2">Net (USD)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="fee-table-body">
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm flex flex-col h-full lg:col-span-1">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">📈 Store Performance</h3>
+                    <p class="text-sm text-gray-500 mb-4">Ranked by Highest Total Earnings.</p>
+                    
+                    <div class="overflow-x-auto overflow-y-auto max-h-96 flex-grow border border-gray-100 rounded-lg">
+                        <table class="w-full text-sm text-left text-gray-500 relative">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 sticky top-0">
+                                <tr>
+                                    <th class="px-4 py-3">Store</th>
+                                    <th class="px-4 py-3">Total Streams</th>
+                                    <th class="px-4 py-3 font-bold text-green-800 bg-green-50">Earnings</th>
+                                    <th class="px-4 py-3 font-bold bg-blue-50">Avg / Play</th>
+                                </tr>
+                            </thead>
+                            <tbody id="store-perf-table-body">
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm flex flex-col h-full lg:col-span-1 border-2 border-purple-100">
+                    <h3 class="text-xl font-bold text-purple-900 mb-2">🔮 Earnings Forecast</h3>
+                    <p class="text-sm text-gray-500 mb-6">Predict potential earnings based on the calculated averages of your uploaded data.</p>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Select Streaming Platform</label>
+                            <select id="forecast-store" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+                                <option value="">Upload data first...</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Target Number of Streams</label>
+                            <input type="number" id="forecast-streams" min="0" placeholder="e.g. 100000" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+                        </div>
+                    </div>
+
+                    <div class="mt-6 bg-purple-50 p-4 rounded-xl border border-purple-200">
+                        <h4 class="text-purple-800 font-bold mb-2">Potential Earnings</h4>
+                        <p class="text-3xl font-black text-purple-900" id="forecast-usd">$0.00</p>
+                        <p class="text-lg text-purple-700 font-medium mt-1" id="forecast-zar">≈ R0.00</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let exchangeRate = 16.31; 
+        let charts = {}; 
+        let storeAveragesMap = {};
+
+        // Built-in country code fallback map if the Excel doesn't contain a mapping sheet
+        const defaultCountryMap = {
+            "ZA": "South Africa", "ZW": "Zimbabwe", "RO": "Romania", "DE": "Germany", 
+            "US": "United States", "GB": "United Kingdom", "CA": "Canada", "AU": "Australia", 
+            "FR": "France", "NL": "Netherlands", "NZ": "New Zealand", "IE": "Ireland", 
+            "CH": "Switzerland", "SE": "Sweden", "NO": "Norway", "DK": "Denmark", 
+            "FI": "Finland", "ES": "Spain", "IT": "Italy", "PT": "Portugal", 
+            "BR": "Brazil", "IN": "India", "NG": "Nigeria", "GH": "Ghana", "KE": "Kenya"
+        };
+
+        async function fetchExchangeRate() {
+            try {
+                const response = await fetch("https://open.er-api.com/v6/latest/USD");
+                const data = await response.json();
+                exchangeRate = data.rates.ZAR;
+                document.getElementById('rate-display').innerText = `Live Rate: 1 USD = ${exchangeRate.toFixed(2)} ZAR`;
+            } catch (error) {
+                console.error("Failed to fetch exchange rate", error);
+                document.getElementById('rate-display').innerText = `Using Offline Rate: 1 USD = ${exchangeRate.toFixed(2)} ZAR`;
+            }
+        }
+        fetchExchangeRate();
+
+        document.getElementById('file-upload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, {type: 'array'});
+                
+                // 1. Scan for a Country Codes lookup sheet
+                let countryCodeSheetName = workbook.SheetNames.find(s => s.toLowerCase().includes('countrycode') || s.toLowerCase().includes('code'));
+                let countryMap = {};
+                if (countryCodeSheetName) {
+                    const ccSheet = workbook.Sheets[countryCodeSheetName];
+                    const ccData = XLSX.utils.sheet_to_json(ccSheet);
+                    ccData.forEach(row => {
+                        let codeKey = Object.keys(row).find(k => ['CODE', 'Code', 'Country Code', 'CODES'].includes(k.trim()));
+                        let nameKey = Object.keys(row).find(k => ['COUNTRY', 'Country', 'Country Name'].includes(k.trim()));
+                        if (codeKey && nameKey) {
+                            countryMap[String(row[codeKey]).trim().toUpperCase()] = String(row[nameKey]).trim();
+                        }
+                    });
+                }
+
+                // 2. Locate DistroKid stats tab
+                let sheetName = workbook.SheetNames.find(s => s.toLowerCase().includes('distrokid')) || workbook.SheetNames[0];
+                if (sheetName === countryCodeSheetName && workbook.SheetNames.length > 1) {
+                    sheetName = workbook.SheetNames.find(s => s !== countryCodeSheetName);
+                }
+                
+                const sheet = workbook.Sheets[sheetName];
+                const jsonData = XLSX.utils.sheet_to_json(sheet);
+                processDashboardData(jsonData, countryMap);
+            };
+            reader.readAsArrayBuffer(file);
+        });
+
+        function processDashboardData(data, countryMap) {
+            // Strictly looks for possibilities in order of priority preference
+            const getCol = (row, possibilities) => {
+                for (let p of possibilities) {
+                    let key = Object.keys(row).find(k => k.trim().toLowerCase() === p.toLowerCase());
+                    if (key) return row[key];
+                }
+                return null;
+            };
+
+            let totalUSD = 0, totalStreams = 0;
+            let artistStats = {}, storeStats = {}, storeEarnings = {}, countryStats = {}, songStats = {};
+
+            data.forEach(row => {
+                let earnings = parseFloat(getCol(row, ['Earnings (USD)', 'Earnings'])) || 0;
+                let quantity = parseInt(getCol(row, ['Quantity', 'Streams'])) || 0;
+                let artist = getCol(row, ['Artist']) || 'Unknown';
+                let store = getCol(row, ['Store']) || 'Unknown';
+                let song = getCol(row, ['Title', 'Song', 'Track Name']) || 'Unknown';
+                
+                // Prioritize Country Name column first, then structural fallbacks
+                let countryRaw = getCol(row, ['Country of Sale', 'Country Name', 'Country Code', 'Country']) || 'Unknown';
+                let countryStr = String(countryRaw).trim();
+
+                // Convert 2-letter codes into full country names dynamically
+                if (countryStr.length === 2) {
+                    let codeUpper = countryStr.toUpperCase();
+                    if (countryMap && countryMap[codeUpper]) {
+                        countryStr = countryMap[codeUpper];
+                    } else if (defaultCountryMap[codeUpper]) {
+                        countryStr = defaultCountryMap[codeUpper];
+                    }
+                }
+
+                totalUSD += earnings;
+                totalStreams += quantity;
+
+                if (!artistStats[artist]) artistStats[artist] = 0; artistStats[artist] += earnings;
+                if (!storeStats[store]) storeStats[store] = 0; storeStats[store] += quantity;
+                if (!storeEarnings[store]) storeEarnings[store] = 0; storeEarnings[store] += earnings;
+                if (!countryStats[countryStr]) countryStats[countryStr] = 0; countryStats[countryStr] += earnings;
+                if (!songStats[song]) songStats[song] = 0; songStats[song] += earnings;
+            });
+
+            document.getElementById('metric-usd').innerText = `$${totalUSD.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            document.getElementById('metric-zar').innerText = `R${(totalUSD * exchangeRate).toLocaleString('en-ZA', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            document.getElementById('metric-streams').innerText = totalStreams.toLocaleString();
+
+            renderCharts(artistStats, storeStats, countryStats, songStats);
+            renderStorePerformance(storeStats, storeEarnings);
+            calculateFees(totalUSD);
+
+            document.getElementById('dashboard').classList.remove('hidden');
+        }
+
+        function getTopN(obj, n) { return Object.entries(obj).sort((a, b) => b[1] - a[1]).slice(0, n); }
+
+        function renderCharts(artistStats, storeStats, countryStats, songStats) {
+            Object.keys(charts).forEach(key => { if (charts[key]) charts[key].destroy(); });
+
+            const topArtists = getTopN(artistStats, 10);
+            charts.artist = new Chart(document.getElementById('artistChart').getContext('2d'), { type: 'bar', data: { labels: topArtists.map(x => x[0]), datasets: [{ label: 'Earnings (USD)', data: topArtists.map(x => x[1]), backgroundColor: '#3b82f6', borderRadius: 4 }] } });
+
+            const topStores = getTopN(storeStats, 10);
+            charts.store = new Chart(document.getElementById('storeChart').getContext('2d'), { type: 'doughnut', data: { labels: topStores.map(x => x[0]), datasets: [{ data: topStores.map(x => x[1]), backgroundColor: ['#ef4444', '#10b981', '#f59e0b', '#6366f1', '#8b5cf6', '#ec4899', '#06b6d4', '#14b8a6', '#84cc16', '#eab308'] }] } });
+
+            // Top 10 Countries Bar Chart (Now showing Names explicitly)
+            const topCountries = getTopN(countryStats, 10);
+            charts.country = new Chart(document.getElementById('countryChart').getContext('2d'), { type: 'bar', data: { labels: topCountries.map(x => x[0]), datasets: [{ label: 'Earnings (USD)', data: topCountries.map(x => x[1]), backgroundColor: '#10b981', borderRadius: 4 }] } });
+
+            const topSongs = getTopN(songStats, 10);
+            charts.song = new Chart(document.getElementById('songChart').getContext('2d'), { type: 'bar', data: { labels: topSongs.map(x => x[0]), datasets: [{ label: 'Earnings (USD)', data: topSongs.map(x => x[1]), backgroundColor: '#8b5cf6', borderRadius: 4 }] }, options: { indexAxis: 'y' } });
+        }
+
+        function renderStorePerformance(storeStreams, storeEarnings) {
+            let storeData = [];
+            for (let store in storeStreams) {
+                let streams = storeStreams[store];
+                let earnings = storeEarnings[store] || 0;
+                let avg = streams > 0 ? (earnings / streams) : 0;
+                if (streams > 0 || earnings > 0) storeData.push({ store, streams, earnings, avg });
+            }
+
+            storeData.sort((a, b) => b.earnings - a.earnings);
+
+            const tbody = document.getElementById('store-perf-table-body');
+            const forecastSelect = document.getElementById('forecast-store');
+            
+            tbody.innerHTML = '';
+            forecastSelect.innerHTML = '<option value="">Select a Platform...</option>';
+            storeAveragesMap = {};
+
+            storeData.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = "bg-white border-b hover:bg-gray-50";
+                tr.innerHTML = `
+                    <td class="px-4 py-2 font-medium text-gray-900">${item.store}</td>
+                    <td class="px-4 py-2 text-gray-600">${item.streams.toLocaleString()}</td>
+                    <td class="px-4 py-2 font-bold text-green-700 bg-green-50/50">$${item.earnings.toFixed(2)}</td>
+                    <td class="px-4 py-2 font-mono text-xs bg-blue-50 text-blue-800">$${item.avg.toFixed(6)}</td>
+                `;
+                tbody.appendChild(tr);
+
+                storeAveragesMap[item.store] = item.avg;
+                const opt = document.createElement('option');
+                opt.value = item.store;
+                opt.textContent = `${item.store} (Avg: $${item.avg.toFixed(6)})`;
+                forecastSelect.appendChild(opt);
+            });
+
+            calculateForecast();
+        }
+
+        function calculateFees(total) {
+            const fees = [
+                { method: 'ACH (U.S.)', fee: 1.12, isNonUS: false },
+                { method: 'eCheck (U.S.)', fee: 1.69, isNonUS: false },
+                { method: 'Local Transfer', fee: 5.62, isNonUS: true },
+                { method: 'Paper Check', fee: 3.37, isNonUS: true },
+                { method: 'Wire (U.S.)', fee: 16.85, isNonUS: false },
+                { method: 'Wire (Intl local)', fee: 21.47, isNonUS: true },
+                { method: 'Wire (Intl USD)', fee: 29.21, isNonUS: true },
+                { method: 'PayPal (Non-US)', fee: Math.min(1.12 + (0.02 * total), 23.59), isNonUS: true },
+                { method: 'PayPal (US)', fee: Math.min(1.12 + (0.02 * total), 2.25), isNonUS: false }
+            ];
+
+            fees.sort((a, b) => a.fee - b.fee);
+            const bestNonUS = fees.find(f => f.isNonUS);
+
+            if (bestNonUS) {
+                const net = total - bestNonUS.fee;
+                document.getElementById('rec-method').innerText = bestNonUS.method;
+                document.getElementById('rec-fee').innerText = bestNonUS.fee.toFixed(2);
+                document.getElementById('rec-net').innerText = net.toFixed(2);
+                document.getElementById('rec-zar').innerText = `≈ R${(net * exchangeRate).toLocaleString('en-ZA', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            }
+
+            const tbody = document.getElementById('fee-table-body');
+            tbody.innerHTML = '';
+            fees.forEach(f => {
+                const net = total - f.fee;
+                const tr = document.createElement('tr');
+                tr.className = "bg-white border-b";
+                tr.innerHTML = `
+                    <td class="px-4 py-2 font-medium ${f.isNonUS ? 'text-gray-900' : 'text-gray-400'}">${f.method}</td>
+                    <td class="px-4 py-2">$${f.fee.toFixed(2)}</td>
+                    <td class="px-4 py-2">$${net.toFixed(2)}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function calculateForecast() {
+            const selectedStore = document.getElementById('forecast-store').value;
+            const targetStreams = parseFloat(document.getElementById('forecast-streams').value) || 0;
+            let projectedUSD = 0;
+            if (selectedStore && storeAveragesMap[selectedStore]) {
+                projectedUSD = storeAveragesMap[selectedStore] * targetStreams;
+            }
+            const projectedZAR = projectedUSD * exchangeRate;
+            document.getElementById('forecast-usd').innerText = `$${projectedUSD.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            document.getElementById('forecast-zar').innerText = `≈ R${projectedZAR.toLocaleString('en-ZA', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+        }
+
+        document.getElementById('forecast-store').addEventListener('change', calculateForecast);
+        document.getElementById('forecast-streams').addEventListener('input', calculateForecast);
+    </script>
+</body>
+</html>
